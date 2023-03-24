@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class GreetingController {
+public class HomeController {
 
-    // Get HTTP localhost:8080
-    @GetMapping()
+    @GetMapping
     public String greetings() {
-        return "Greetings";
+        return "Greetings!";
     }
+
 }

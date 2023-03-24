@@ -1,15 +1,20 @@
 package com.example.demo.model;
 
+import jakarta.validation.constraints.NotEmpty;
+
 import java.util.Objects;
 
 public class Customer {
-
     private int id;
+
+    @NotEmpty(message = "name cannot be empty.")
     private String name;
+
     private String email;
 
+
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -17,7 +22,7 @@ public class Customer {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -25,23 +30,27 @@ public class Customer {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == this)
+            return true;
+        if (!(o instanceof Customer)) {
+            return false;
+        }
         Customer customer = (Customer) o;
-        return id == customer.id;
+        return id == customer.id && Objects.equals(name, customer.name) && Objects.equals(email, customer.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, email);
     }
 }
